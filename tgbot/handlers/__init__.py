@@ -1,4 +1,6 @@
 """Import all routers and add them to routers_list."""
+from aiogram import Router
+
 from .admin import admin_router
 from .echo import echo_router
 from .simple_menu import menu_router
@@ -11,6 +13,10 @@ routers_list = [
     echo_router,  # echo_router must be last
 ]
 
+master_router = Router()
+
+master_router.include_routers(*routers_list)
+
 __all__ = [
-    "routers_list",
+    "master_router",
 ]

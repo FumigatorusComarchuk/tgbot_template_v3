@@ -8,7 +8,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.storage.redis import RedisStorage, DefaultKeyBuilder
 
 from tgbot.config import load_config, Config
-from tgbot.handlers import routers_list
+from tgbot.handlers import master_router
 from tgbot.middlewares.config import ConfigMiddleware
 from tgbot.services import broadcaster
 
@@ -93,7 +93,7 @@ async def main():
     bot = Bot(token=config.tg_bot.token, default=DefaultBotProperties(parse_mode="HTML"))
     dp = Dispatcher(storage=storage)
 
-    dp.include_routers(*routers_list)
+    dp.include_router(master_router)
 
     register_global_middlewares(dp, config)
 
