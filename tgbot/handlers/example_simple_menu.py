@@ -4,19 +4,19 @@ from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery
 from aiogram.utils.formatting import as_section, as_key_value, as_marked_list
 
-from tgbot.keyboards.inline import simple_menu_keyboard, my_orders_keyboard, \
-    OrderCallbackData
+from tgbot.keyboards.inline import example_simple_menu_keyboard, example_my_orders_keyboard, \
+    ExampleOrderCallbackData
 
-menu_router = Router()
+example_menu_router = Router()
 
 
-@menu_router.message(Command("menu"))
+@example_menu_router.message(Command("menu"))
 async def show_menu(message: Message):
-    await message.answer("Виберіть пункт меню:", reply_markup=simple_menu_keyboard())
+    await message.answer("Виберіть пункт меню:", reply_markup=example_simple_menu_keyboard())
 
 
 # We can use F.data filter to filter callback queries by data field from CallbackQuery object
-@menu_router.callback_query(F.data == "create_order")
+@example_menu_router.callback_query(F.data == "create_order")
 async def create_order(query: CallbackQuery):
     # Firstly, always answer callback query (as Telegram API requires)
     await query.answer()
@@ -37,16 +37,16 @@ ORDERS = [
 ]
 
 
-@menu_router.callback_query(F.data == "my_orders")
+@example_menu_router.callback_query(F.data == "my_orders")
 async def my_orders(query: CallbackQuery):
     await query.answer()
     await query.message.edit_text("Ви обрали перегляд ваших замовлень!",
-                                  reply_markup=my_orders_keyboard(ORDERS))
+                                  reply_markup=example_my_orders_keyboard(ORDERS))
 
 
 # To filter the callback data, that was created with CallbackData factory, you can use .filter() method
-@menu_router.callback_query(OrderCallbackData.filter())
-async def show_order(query: CallbackQuery, callback_data: OrderCallbackData):
+@example_menu_router.callback_query(ExampleOrderCallbackData.filter())
+async def show_order(query: CallbackQuery, callback_data: ExampleOrderCallbackData):
     await query.answer()
 
     # You can get the data from callback_data object as attributes

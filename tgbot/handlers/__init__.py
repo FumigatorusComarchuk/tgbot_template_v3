@@ -1,16 +1,16 @@
 """Import all routers and add them to routers_list."""
 from aiogram import Router
 
-from .admin import admin_router
-from .echo import echo_router
-from .simple_menu import menu_router
-from .user import user_router
+from .example_admin import example_admin_router
+from .example_echo import example_echo_router
+from .example_simple_menu import example_menu_router
+from .example_user import example_user_router
 
 routers_list = [
-    admin_router,
-    menu_router,
-    user_router,
-    echo_router,  # echo_router must be last
+    example_admin_router,
+    example_menu_router,
+    example_user_router,
+    example_echo_router,  # echo_router must be last
 ]
 
 master_router = Router()

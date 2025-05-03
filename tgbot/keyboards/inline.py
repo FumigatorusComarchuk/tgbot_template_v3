@@ -4,7 +4,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
 # This is a simple keyboard, that contains 2 buttons
-def very_simple_keyboard():
+def example_very_simple_keyboard():
     buttons = [
         [
             InlineKeyboardButton(text="📝 Створити замовлення",
@@ -20,7 +20,7 @@ def very_simple_keyboard():
 
 
 # This is the same keyboard, but created with InlineKeyboardBuilder (preferred way)
-def simple_menu_keyboard():
+def example_simple_menu_keyboard():
     # First, you should create an InlineKeyboardBuilder object
     keyboard = InlineKeyboardBuilder()
 
@@ -43,7 +43,7 @@ def simple_menu_keyboard():
 
 
 # For a more advanced usage of callback_data, you can use the CallbackData factory
-class OrderCallbackData(CallbackData, prefix="order"):
+class ExampleOrderCallbackData(CallbackData, prefix="order"):
     """
     This class represents a CallbackData object for orders.
 
@@ -58,7 +58,7 @@ class OrderCallbackData(CallbackData, prefix="order"):
     order_id: int
 
 
-def my_orders_keyboard(orders: list):
+def example_my_orders_keyboard(orders: list):
     # Here we use a list of orders as a parameter (from simple_menu.py)
 
     keyboard = InlineKeyboardBuilder()
@@ -67,7 +67,7 @@ def my_orders_keyboard(orders: list):
             text=f"📝 {order['title']}",
             # Here we use an instance of OrderCallbackData class as callback_data parameter
             # order id is the field in OrderCallbackData class, that we defined above
-            callback_data=OrderCallbackData(order_id=order["id"])
+            callback_data=ExampleOrderCallbackData(order_id=order["id"])
         )
 
     return keyboard.as_markup()
